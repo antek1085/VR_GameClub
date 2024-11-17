@@ -447,8 +447,12 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.3f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.3f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.3f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
-"Assets/LocomotionSystemControllerButton.cs"
-"Assets/TurnOnOffGameObject.cs"
+"Assets/Game/LocomotionSystemControllerButton.cs"
+"Assets/Game/Pistol/BulletScript.cs"
+"Assets/Game/Pistol/IDamageable.cs"
+"Assets/Game/Pistol/PistolScript.cs"
+"Assets/Game/ShootingBottleMiniGame/BottleScript.cs"
+"Assets/Game/TurnOnOffGameObject.cs"
 "Assets/TutorialInfo/Scripts/Readme.cs"
 -langversion:9.0
 /deterministic
