@@ -10,11 +10,11 @@ public class BulletScript : MonoBehaviour
       IDamageable damageable = other.GetComponent<IDamageable>();
       if (damageable != null)
       {
-         damageable.Danageable();
+         damageable.Damageable();
       }
       else
       {
-         Destroy(gameObject);
+        // Destroy(gameObject);
       }
    }
 

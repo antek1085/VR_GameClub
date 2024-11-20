@@ -13,7 +13,7 @@ public class BottleScript : MonoBehaviour,IDamageable
     {
         
     }
-    public void Danageable()
+    public void Damageable()
     {
         Destroy(gameObject);
     }
