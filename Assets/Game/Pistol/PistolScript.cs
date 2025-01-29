@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Feedback;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class PistolScript : MonoBehaviour
 {
@@ -14,42 +14,53 @@ public class PistolScript : MonoBehaviour
     [SerializeField] Transform shootPoint;
     
     [SerializeField] int ammunition;
+    Ammo _ammo;
     [SerializeField] float timeBetweenShoots;
 
     [SerializeField] bool canHeShoot;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
+    XRBaseInteractor socketInteractor;
+    
+    [SerializeField] InputActionReference socketActionLeft,socketActionRight;
+    string controllerName;
+    
 
     void Awake()
     {
+        socketActionLeft.action.Enable();
+        socketActionLeft.action.performed += RemoveMagazine;
+        socketActionRight.action.Enable();
+        socketActionRight.action.performed += RemoveMagazine;
+        
+        
+        
         canHeShoot = true;
         XRBaseInteractable xrBaseInteractable = GetComponent<XRBaseInteractable>();
         xrBaseInteractable.activated.AddListener(TriggerHapticFeedback);
+        socketInteractor.selectEntered.AddListener(AddAmmunition);
+        socketInteractor.selectExited.AddListener(RemoveAmmunition);
     }
-    public void TryToShoot()
+
+    /*public void TryToShoot()
     {
-        /*if (canHeShoot == true && ammunition != 0)
-        {
-            StartCoroutine(Shoot());
-        }*/
-    }
+       
+    }*/
 
     IEnumerator Shoot()
     {
         GameObject shootedBullet;
         canHeShoot = false;
-        ammunition -= 1;
+        _ammo.ammo -= 1;
         shootedBullet = Instantiate(bullet, shootPoint.position, Quaternion.Euler(0,0,90));
         shootedBullet.GetComponent<Rigidbody>().AddForce(shootPoint.forward * 2000f);
         
         yield return new WaitForSeconds(timeBetweenShoots);
         canHeShoot = true;
         StopCoroutine(Shoot());
+        
     }
 
     public void TriggerHapticFeedback(BaseInteractionEventArgs eventArgs)
     {
-        Debug.Log(eventArgs);
         if (eventArgs.interactorObject is XRBaseInputInteractor controllerInteractor)
         {
             TriggerHaptic(controllerInteractor);
@@ -58,10 +69,37 @@ public class PistolScript : MonoBehaviour
 
     public void TriggerHaptic(XRBaseInteractor interactor)
     {
-        if (canHeShoot == true && ammunition != 0)
+        controllerName = interactor.transform.parent.name;
+        if (canHeShoot == true && _ammo.ammo > 0)
         {
             interactor.GetComponentInParent<HapticImpulsePlayer>().SendHapticImpulse(0.2f, 0.2f, 10);
+            interactor.transform.parent.GetComponent<ControllerInputActionManager>().
             StartCoroutine(Shoot());
+        }
+    }
+
+    
+    public void AddAmmunition(SelectEnterEventArgs arg0)
+    {
+        _ammo = arg0.interactableObject.transform.GetComponent<Ammo>();
+    }
+    public void RemoveAmmunition(SelectExitEventArgs arg0)
+    {
+        _ammo = null;
+    }
+
+    void RemoveMagazine(InputAction.CallbackContext context)
+    {
+        switch (controllerName)
+        {
+            case "Left Controller":
+                break;
+            case "Right Controller":
+                
+                break;
+            
+            default:
+                break;
         }
     }
    
