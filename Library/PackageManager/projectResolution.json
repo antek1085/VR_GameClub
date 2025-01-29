@@ -5,7 +5,8 @@
   },
   "inputs": [
     "F:\\GIT\\CobbleGames\\VR_GameClub\\Packages\\manifest.json",
-    "F:\\GIT\\CobbleGames\\VR_GameClub\\Packages\\packages-lock.json"
+    "F:\\GIT\\CobbleGames\\VR_GameClub\\Packages\\packages-lock.json",
+    "F:\\GIT\\CobbleGames\\VR_GameClub\\Packages\\com.singularitygroup.hotreload\\package.json"
   ],
   "outputs": {
     "com.unity.ai.navigation@2.0.0": {
@@ -311,6 +312,13 @@
       "resolvedPath": "F:\\GIT\\CobbleGames\\VR_GameClub\\Library\\PackageCache\\com.unity.modules.xr",
       "version": "1.0.0",
       "source": "builtin"
+    },
+    "com.singularitygroup.hotreload@file:F:\\GIT\\CobbleGames\\VR_GameClub\\Packages\\com.singularitygroup.hotreload": {
+      "name": "com.singularitygroup.hotreload",
+      "resolvedPath": "F:\\GIT\\CobbleGames\\VR_GameClub\\Packages\\com.singularitygroup.hotreload",
+      "editorCompatibility": "2018.4.0a1",
+      "version": "1.12.14",
+      "source": "embedded"
     },
     "com.unity.modules.subsystems@1.0.0": {
       "name": "com.unity.modules.subsystems",

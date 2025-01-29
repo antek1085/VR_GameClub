@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Game/Scenes/NO VR Sandbox.unity
+- path: Assets/Game/Scenes/Main VR Scene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
