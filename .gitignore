@@ -34,6 +34,7 @@
 *.HotReload.dll
 /HotReloadCache/
 /HotReloadLogs/
+/Library/
 
 # Gradle cache directory
 .gradle/
