@@ -20,24 +20,23 @@ public class PistolScript : MonoBehaviour
     [SerializeField] bool canHeShoot;
     XRBaseInteractor socketInteractor;
     
-    [SerializeField] InputActionReference socketActionLeft,socketActionRight;
     string controllerName;
     
 
     void Awake()
     {
-        socketActionLeft.action.Enable();
+        /*socketActionLeft.action.Enable();
         socketActionLeft.action.performed += RemoveMagazine;
         socketActionRight.action.Enable();
-        socketActionRight.action.performed += RemoveMagazine;
-        
-        
+        socketActionRight.action.performed += RemoveMagazine;*/
         
         canHeShoot = true;
+        
         XRBaseInteractable xrBaseInteractable = GetComponent<XRBaseInteractable>();
         xrBaseInteractable.activated.AddListener(TriggerHapticFeedback);
-        socketInteractor.selectEntered.AddListener(AddAmmunition);
-        socketInteractor.selectExited.AddListener(RemoveAmmunition);
+        
+        /*socketInteractor.selectEntered.AddListener(AddAmmunition);
+        socketInteractor.selectExited.AddListener(RemoveAmmunition);*/
     }
 
     /*public void TryToShoot()
@@ -49,7 +48,7 @@ public class PistolScript : MonoBehaviour
     {
         GameObject shootedBullet;
         canHeShoot = false;
-        _ammo.ammo -= 1;
+        ammunition -= 1;
         shootedBullet = Instantiate(bullet, shootPoint.position, Quaternion.Euler(0,0,90));
         shootedBullet.GetComponent<Rigidbody>().AddForce(shootPoint.forward * 2000f);
         
@@ -70,10 +69,10 @@ public class PistolScript : MonoBehaviour
     public void TriggerHaptic(XRBaseInteractor interactor)
     {
         controllerName = interactor.transform.parent.name;
-        if (canHeShoot == true && _ammo.ammo > 0)
+        if (canHeShoot == true && ammunition > 0)
         {
-            interactor.GetComponentInParent<HapticImpulsePlayer>().SendHapticImpulse(0.2f, 0.2f, 10);
-            interactor.transform.parent.GetComponent<ControllerInputActionManager>().
+             var test =interactor.GetComponentInParent<HapticImpulsePlayer>().SendHapticImpulse(0.2f, 0.2f);
+             Debug.Log(test);
             StartCoroutine(Shoot());
         }
     }
