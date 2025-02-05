@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7073121362961320425}
   m_Layer: 6
   m_Name: Ammo
-  m_TagString: Untagged
+  m_TagString: Ammo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2779560948834748918}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -5.3517, y: -0.82000065, z: -4.896}
   m_LocalScale: {x: 0.021861508, y: 0.033021815, z: 0.021861512}
   m_ConstrainProportionsScale: 0
@@ -274,4 +274,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07305ab10d18f344ebedd4959baa0e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammo: 0
+  ammo: 10

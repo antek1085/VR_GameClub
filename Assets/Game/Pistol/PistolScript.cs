@@ -25,6 +25,7 @@ public class PistolScript : MonoBehaviour
 
     void Awake()
     {
+        socketInteractor = GetComponentInChildren<XRSocketInteractor>();
         /*socketActionLeft.action.Enable();
         socketActionLeft.action.performed += RemoveMagazine;
         socketActionRight.action.Enable();
@@ -35,8 +36,8 @@ public class PistolScript : MonoBehaviour
         XRBaseInteractable xrBaseInteractable = GetComponent<XRBaseInteractable>();
         xrBaseInteractable.activated.AddListener(TriggerHapticFeedback);
         
-        /*socketInteractor.selectEntered.AddListener(AddAmmunition);
-        socketInteractor.selectExited.AddListener(RemoveAmmunition);*/
+        socketInteractor.selectEntered.AddListener(AddAmmunition);
+        socketInteractor.selectExited.AddListener(RemoveAmmunition);
     }
 
     /*public void TryToShoot()
@@ -48,7 +49,7 @@ public class PistolScript : MonoBehaviour
     {
         GameObject shootedBullet;
         canHeShoot = false;
-        ammunition -= 1;
+        _ammo.ammo -= 1;
         shootedBullet = Instantiate(bullet, shootPoint.position, Quaternion.Euler(0,0,90));
         shootedBullet.GetComponent<Rigidbody>().AddForce(shootPoint.forward * 2000f);
         
@@ -69,11 +70,13 @@ public class PistolScript : MonoBehaviour
     public void TriggerHaptic(XRBaseInteractor interactor)
     {
         controllerName = interactor.transform.parent.name;
-        if (canHeShoot == true && ammunition > 0)
+        if (_ammo != null)
         {
-             var test =interactor.GetComponentInParent<HapticImpulsePlayer>().SendHapticImpulse(0.2f, 0.2f);
-             Debug.Log(test);
-            StartCoroutine(Shoot());
+            if (canHeShoot == true && _ammo.ammo > 0)
+            {
+                var test =interactor.GetComponentInParent<HapticImpulsePlayer>().SendHapticImpulse(0.2f, 0.2f);
+                StartCoroutine(Shoot());
+            }
         }
     }
 

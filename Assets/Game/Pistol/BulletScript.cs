@@ -14,7 +14,7 @@ public class BulletScript : MonoBehaviour
       }
       else
       {
-        // Destroy(gameObject);
+        Destroy(gameObject);
       }
    }
 
