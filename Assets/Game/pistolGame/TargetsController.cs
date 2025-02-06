@@ -36,15 +36,11 @@ public class TargetsController : MonoBehaviour
             }
             pointsText.text = allPoints.ToString();
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartGame();
-        }
     }
 
     void EndGame()
     {
+        StopAllCoroutines();
         countTime = false;
         passedTime = 0;
         for (int i = 0; i < transform.childCount; i++)

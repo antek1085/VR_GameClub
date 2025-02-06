@@ -17,6 +17,10 @@ public class BulletScript : MonoBehaviour
         Destroy(gameObject);
       }
    }
+   void Awake()
+   {
+      rigidbody = GetComponent<Rigidbody>();
+   }
 
    void Update()
    {
@@ -25,6 +29,10 @@ public class BulletScript : MonoBehaviour
       {
          Destroy(gameObject);
       }
+   }
+   
+   void FixedUpdate()
+   {
    }
 
 

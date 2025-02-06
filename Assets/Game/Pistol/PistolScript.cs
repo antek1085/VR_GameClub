@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -20,6 +21,7 @@ public class PistolScript : MonoBehaviour
     XRBaseInteractor socketInteractor;
     
     string controllerName;
+    [SerializeField] TextMeshProUGUI ammoText;
     
 
     void Awake()
@@ -39,10 +41,17 @@ public class PistolScript : MonoBehaviour
         socketInteractor.selectExited.AddListener(RemoveAmmunition);
     }
 
-    /*public void TryToShoot()
+    void Update()
     {
-       
-    }*/
+        if (_ammo != null)
+        {
+            ammoText.text = _ammo.ammo.ToString();
+        }
+        else
+        {
+            ammoText.text = "0";
+        }
+    }
 
     IEnumerator Shoot()
     {
@@ -50,7 +59,7 @@ public class PistolScript : MonoBehaviour
         canHeShoot = false;
         _ammo.ammo -= 1;
         shootedBullet = Instantiate(bullet, shootPoint.position, Quaternion.Euler(0,0,90));
-        shootedBullet.GetComponent<Rigidbody>().AddForce(shootPoint.forward * 2000f);
+        shootedBullet.GetComponent<Rigidbody>().AddForce(shootPoint.forward * 1000f);
         
         yield return new WaitForSeconds(timeBetweenShoots);
         canHeShoot = true;
