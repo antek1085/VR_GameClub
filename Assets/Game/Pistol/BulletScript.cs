@@ -12,7 +12,7 @@ public class BulletScript : MonoBehaviour
       {
          damageable.Damageable();
       }
-      else
+      else if (other.tag == "Bell")
       {
         Destroy(gameObject);
       }

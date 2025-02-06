@@ -26,7 +26,6 @@ public class ShootTarget : MonoBehaviour,IDamageable
         
         switch (targetType)
         {
-
             case TargetType.Friendly:
                 GetComponent<MeshRenderer>().material = friendlyMaterial;
                 break;
@@ -61,13 +60,17 @@ public class ShootTarget : MonoBehaviour,IDamageable
     public void EnableTarget()
     {
         isActive = true;
-        target.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0),1f);
-        
+        var rotation = target.rotation.eulerAngles;
+        rotation.z = 0;
+        target.rotation = Quaternion.Euler(rotation);
+
     }
 
     public void DisableTarget()
     {
         isActive = false;
-        target.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 90, 0), 1f);
+        var rotation = target.rotation.eulerAngles;
+        rotation.z = 90;
+        target.rotation = Quaternion.Euler(rotation);
     }
 }

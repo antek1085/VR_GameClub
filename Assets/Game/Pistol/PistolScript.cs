@@ -13,7 +13,6 @@ public class PistolScript : MonoBehaviour
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPoint;
     
-    [SerializeField] int ammunition;
     Ammo _ammo;
     [SerializeField] float timeBetweenShoots;
 
@@ -55,7 +54,7 @@ public class PistolScript : MonoBehaviour
         
         yield return new WaitForSeconds(timeBetweenShoots);
         canHeShoot = true;
-        StopCoroutine(Shoot());
+        StopCoroutine(Shoot());            
         
     }
 
