@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ammo
+  - Ball
+  - Bell
+  - Bullet
   layers:
   - Default
   - TransparentFX
