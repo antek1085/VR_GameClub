@@ -4,12 +4,22 @@ using UnityEngine;
 public class BellControl : MonoBehaviour
 {
     [SerializeField] TargetsController controller;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] AudioClip  audioClip;
+    AudioSource audioSource;
+
+
+    void Awake()
+    {
+        audioSource= GetComponent<AudioSource>();
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bullet"))
         {
             controller.StartGame();
+            if (audioClip != null)
+                audioSource.PlayOneShot(audioClip)
+            ;
         }
     }
 }

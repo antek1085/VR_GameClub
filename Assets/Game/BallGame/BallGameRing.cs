@@ -16,6 +16,15 @@ public class BallGameRing : MonoBehaviour
     
     [SerializeField] GameObject highScoreList;
 
+    [Header("Sounds")]
+    [SerializeField] AudioClip startGame, gettingPoint, gameOver;
+    AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         if (isGameStarted)
@@ -26,6 +35,7 @@ public class BallGameRing : MonoBehaviour
             pointsText.text = points.ToString();
             if (timeLeft < 0)
             {
+                audioSource.PlayOneShot(gameOver);
                 timeText.text = "60";
                 points = 0;
                 pointsText.text = points.ToString();
@@ -46,7 +56,12 @@ public class BallGameRing : MonoBehaviour
             switch (isGameStarted)
             {
                 case true:
-                    points++;
+                    if (other.GetComponent<BallScript>().isItVaiable)
+                    {
+                        points++;
+                        audioSource.PlayOneShot(gettingPoint);  
+                        other.gameObject.GetComponent<BallScript>().isItVaiable = false;
+                    }
                     break;
                 case false:
                     StartGame();
@@ -59,6 +74,7 @@ public class BallGameRing : MonoBehaviour
 
     public void StartGame()
     {
+        audioSource.PlayOneShot(startGame);
         isGameStarted = true;
         timeLeft = playTime;
     }

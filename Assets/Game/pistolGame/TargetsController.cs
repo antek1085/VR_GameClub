@@ -19,7 +19,7 @@ public class TargetsController : MonoBehaviour
     void Awake()
     {
         countTime = false;
-        for (int i = 0; i < transform.childCount -1; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
             shootTargetsList.Add(transform.GetChild(i).GetComponentInChildren<ShootTarget>()); 
         }
@@ -36,12 +36,25 @@ public class TargetsController : MonoBehaviour
             }
             pointsText.text = allPoints.ToString();
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartGame();
+        }
     }
 
     void EndGame()
     {
         countTime = false;
         passedTime = 0;
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            _shootTarget = transform.GetChild(i).GetComponentInChildren<ShootTarget>();
+            if (_shootTarget.isActive == true)
+            {
+                _shootTarget.DisableTarget();
+            }
+        }
     }
 
 
@@ -65,43 +78,38 @@ public class TargetsController : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
 
-        for (int i = 0; i < shootTargetsList.Count -1; i++)
+        int count = 0;
+        
+        for (int i = 0; i < shootTargetsList.Count; i++)
         {
             if (shootTargetsList[i].isActive == false)
             {
-                ChooseTarget();
-                break;
-            }
-            else if (shootTargetsList[shootTargetsList.Count - 1].isActive == true)
-            {
-                break;
+                count++;
             }
         }
-        StartCoroutine(ActiveObjects());
+        if (count == 0)
+        {
+            StartCoroutine(ActiveObjects());
+        }
+        else
+        {
+            ChooseTarget();
+        }
     }
 
     void ChooseTarget()
     {
-            int count = 0;
+        
             int i = Random.Range(0, shootTargetsList.Count);
             _shootTarget = shootTargetsList[i];
             if (_shootTarget.isActive == false)
             {
-                count = 0;
                 _shootTarget.EnableTarget();
                 StartCoroutine(ActiveObjects());
             }
             else
             {
-                if (count > 90)
-                {
-                    EndGame();
-                }
-                else
-                {
-                    count++;
                     ChooseTarget(); 
-                }
             }
     }
     
