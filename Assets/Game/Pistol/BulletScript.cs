@@ -19,6 +19,7 @@ public class BulletScript : MonoBehaviour
    }*/
    void OnCollisionEnter(Collision other)
    {
+      Debug.Log(other.gameObject.name);
       IDamageable damageable = other.transform.GetComponent<IDamageable>();
       if (damageable != null)
       {
