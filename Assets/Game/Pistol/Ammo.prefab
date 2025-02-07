@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 5783701911219086690}
   - component: {fileID: 74913933951419517}
   - component: {fileID: 4312793513638420981}
-  - component: {fileID: 7670316104605277124}
   - component: {fileID: 4806313824279276575}
   - component: {fileID: 3909861790294804770}
   - component: {fileID: 7073121362961320425}
+  - component: {fileID: 271480476644159320}
   m_Layer: 6
   m_Name: Ammo
   m_TagString: Ammo
@@ -91,29 +91,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7670316104605277124
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2779560948834748918}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!54 &4806313824279276575
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -276,6 +253,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammo: 20
+--- !u!65 &271480476644159320
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2779560948834748918}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000004, y: 2, z: 1.0000001}
+  m_Center: {x: 0.00000005960466, y: 3.6082248e-16, z: -0.00000008940696}
 --- !u!1001 &3702078640222440292
 PrefabInstance:
   m_ObjectHideFlags: 0

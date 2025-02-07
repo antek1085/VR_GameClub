@@ -18,8 +18,9 @@ public class BellControl : MonoBehaviour
         {
             controller.StartGame();
             if (audioClip != null)
-                audioSource.PlayOneShot(audioClip)
-            ;
+            {
+                audioSource.PlayOneShot(audioClip);
+            }
         }
     }
 }

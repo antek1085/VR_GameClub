@@ -1,19 +1,21 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Comfort;
 
 public class TurnOnOffGameObject : MonoBehaviour
 {
     [SerializeField] private GameObject gameObject;
-    [SerializeField] private GameObject anotherObject;
+    [FormerlySerializedAs("anotherObject")]
+    [SerializeField] private GameObject sliderObject;
     [SerializeField] private TMP_Dropdown m_Dropdown;
     [SerializeField] private TunnelingVignetteController vignette;
 
     private void Awake()
     {
-        m_Dropdown = anotherObject.GetComponent<TMP_Dropdown>();
+        m_Dropdown = sliderObject.GetComponent<TMP_Dropdown>();
         m_Dropdown.onValueChanged.AddListener(delegate {
             DropdownValueChanged(m_Dropdown);
         });
@@ -23,17 +25,17 @@ public class TurnOnOffGameObject : MonoBehaviour
     public void ChangeActiv()
     {
         gameObject.SetActive(!gameObject.activeSelf);
-        if (anotherObject != null)
+        if (sliderObject != null)
         {
             switch (gameObject.activeSelf)
             {
                 case true:
-                    anotherObject.SetActive(true);
-                    gameObject.GetComponent<Image>().color = Color.green;
+                    sliderObject.SetActive(true);
+                    GetComponent<Image>().color = Color.green;
                     break;
                 case false:
-                    anotherObject.SetActive(false);
-                    gameObject.GetComponent<Image>().color = Color.white;
+                    sliderObject.SetActive(false);
+                    GetComponent<Image>().color = Color.white;
                     break;
             }
         }

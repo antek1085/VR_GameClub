@@ -37,12 +37,12 @@ public class BallGameRing : MonoBehaviour
             {
                 audioSource.PlayOneShot(gameOver);
                 timeText.text = "60";
-                points = 0;
                 pointsText.text = points.ToString();
                 isGameStarted = false;
                 
                 if(timePlayed > highScoreList.transform.childCount-1) timePlayed = 0;
                 highScoreList.transform.GetChild(timePlayed).GetComponentInChildren<TextMeshProUGUI>().text = points.ToString();
+                points = 0;
                 timePlayed += 1;
             }
         }

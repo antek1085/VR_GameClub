@@ -13,12 +13,20 @@ public class TargetsController : MonoBehaviour
     bool countTime;
     [SerializeField] float playTime;
     public float passedTime;
+    int intPassedTime;
     [SerializeField] TextMeshProUGUI pointsText;
+    [SerializeField] TextMeshProUGUI timeText;
+    [SerializeField] TextMeshProUGUI scoresText;
     List<ShootTarget> shootTargetsList = new List<ShootTarget>();
+    AudioSource audioSource;
+    [SerializeField] AudioClip endingMusic;
 
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         countTime = false;
+        timeText.text = playTime.ToString();
+        pointsText.text = allPoints.ToString();
         for (int i = 0; i < transform.childCount; i++)
         {
             shootTargetsList.Add(transform.GetChild(i).GetComponentInChildren<ShootTarget>()); 
@@ -29,8 +37,11 @@ public class TargetsController : MonoBehaviour
     {
         if (countTime)
         {
-            passedTime += Time.deltaTime;
-            if (passedTime >= playTime)
+            passedTime -= Time.deltaTime;
+            intPassedTime = (int)passedTime;
+            timeText.text = intPassedTime.ToString();
+            scoresText.text = allPoints.ToString();
+            if (passedTime < 0)
             {
                 EndGame();
             }
@@ -40,9 +51,9 @@ public class TargetsController : MonoBehaviour
 
     void EndGame()
     {
+        audioSource.PlayOneShot(endingMusic);
         StopAllCoroutines();
         countTime = false;
-        passedTime = 0;
         for (int i = 0; i < transform.childCount; i++)
         {
             _shootTarget = transform.GetChild(i).GetComponentInChildren<ShootTarget>();
@@ -58,14 +69,11 @@ public class TargetsController : MonoBehaviour
     {
         StopAllCoroutines();
         countTime = true;
-        passedTime = 0;
-        for (int i = 0; i < transform.childCount-1; i++)
+        passedTime = playTime;
+        for (int i = 0; i < transform.childCount; i++)
         {
             _shootTarget = transform.GetChild(i).GetComponentInChildren<ShootTarget>();
-            if (_shootTarget.isActive == true)
-            {
                 _shootTarget.DisableTarget();
-            }
         }
         StartCoroutine(ActiveObjects());
     }
@@ -74,12 +82,12 @@ public class TargetsController : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
 
-        int count = 0;
+        int count = 0; 
         
         for (int i = 0; i < shootTargetsList.Count; i++)
         {
             if (shootTargetsList[i].isActive == false)
-            {
+            { 
                 count++;
             }
         }

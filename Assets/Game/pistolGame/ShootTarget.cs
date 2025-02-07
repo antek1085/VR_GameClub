@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class ShootTarget : MonoBehaviour,IDamageable
 {
-    [SerializeField] Material friendlyMaterial, enemyMaterial;
     public bool isActive;
-    private Transform target;
+    [SerializeField] Transform target;
     private TargetsController controller;
     [SerializeField] float points;
     float time;
@@ -27,20 +26,8 @@ public class ShootTarget : MonoBehaviour,IDamageable
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        target = GetComponentInParent<Transform>();
         controller = GetComponentInParent<TargetsController>();
         
-        switch (targetType)
-        {
-            case TargetType.Friendly:
-                GetComponent<MeshRenderer>().material = friendlyMaterial;
-                break;
-            case TargetType.Enemy:
-                GetComponent<MeshRenderer>().material = enemyMaterial;
-                break;
-            default:
-               break;
-        }
     }
     void Update()
     {
@@ -79,8 +66,8 @@ public class ShootTarget : MonoBehaviour,IDamageable
     {
         isActive = true;
         var rotation = target.rotation.eulerAngles;
-        rotation.z = 0;
-        target.rotation = Quaternion.Euler(rotation);
+        rotation.x = 0;
+        target.localRotation = Quaternion.Euler(rotation);
         time = 10f;
     }
 
@@ -88,7 +75,7 @@ public class ShootTarget : MonoBehaviour,IDamageable
     {
         isActive = false;
         var rotation = target.rotation.eulerAngles;
-        rotation.z = 90;
-        target.rotation = Quaternion.Euler(rotation);
+        rotation.x = -90;
+        target.localRotation = Quaternion.Euler(rotation);
     }
 }

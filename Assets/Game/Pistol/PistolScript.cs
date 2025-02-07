@@ -22,10 +22,13 @@ public class PistolScript : MonoBehaviour
     
     string controllerName;
     [SerializeField] TextMeshProUGUI ammoText;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip noAmmoSound,shootSound;
     
 
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         socketInteractor = GetComponentInChildren<XRSocketInteractor>();
         /*socketActionLeft.action.Enable();
         socketActionLeft.action.performed += RemoveMagazine;
@@ -83,8 +86,17 @@ public class PistolScript : MonoBehaviour
             if (canHeShoot == true && _ammo.ammo > 0)
             {
                 var test =interactor.GetComponentInParent<HapticImpulsePlayer>().SendHapticImpulse(0.2f, 0.2f);
+                audioSource.PlayOneShot(shootSound);
                 StartCoroutine(Shoot());
             }
+            if (_ammo.ammo == 0)
+            {
+                audioSource.PlayOneShot(noAmmoSound);
+            }
+        }
+        else
+        {
+            audioSource.PlayOneShot(noAmmoSound);
         }
     }
 

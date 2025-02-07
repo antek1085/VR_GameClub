@@ -5,7 +5,7 @@ public class BulletScript : MonoBehaviour
 {
    Rigidbody rigidbody;
    [SerializeField] float lifeTime;
-   void OnTriggerEnter(Collider other)
+   /*void OnTriggerEnter(Collider other)
    {
       IDamageable damageable = other.GetComponent<IDamageable>();
       if (damageable != null)
@@ -15,6 +15,19 @@ public class BulletScript : MonoBehaviour
       else if (other.tag == "Bell")
       {
         Destroy(gameObject);
+      }
+   }*/
+   void OnCollisionEnter(Collision other)
+   {
+      IDamageable damageable = other.transform.GetComponent<IDamageable>();
+      if (damageable != null)
+      {
+         damageable.Damageable();
+         Destroy(gameObject);
+      }
+      else if (other.transform.tag == "Bell")
+      {
+         Destroy(gameObject);
       }
    }
    void Awake()
